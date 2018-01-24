@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #008080;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="general.PuzzleController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #008080;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="general.PuzzleController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="570.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutX="60.0" layoutY="60.0" prefHeight="480.0" prefWidth="480.0" style="-fx-background-color: #ffffff;">
+            <Pane layoutX="18.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutX="320.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutY="160.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutX="160.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutX="160.0" layoutY="160.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutX="320.0" layoutY="160.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutY="320.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutX="160.0" layoutY="320.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="160.0" layoutX="320.0" layoutY="320.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <ImageView fx:id="imgview" fitHeight="160.0" fitWidth="160.0" layoutY="1.0" onMouseClicked="#moveImage" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../resources/image/goodbrains.jpg" />
-                     </image>
-                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutX="200.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutY="100.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutX="100.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutX="100.0" layoutY="100.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutX="200.0" layoutY="100.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutY="200.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutX="100.0" layoutY="200.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#394c5e" height="100.0" layoutX="200.0" layoutY="200.0" stroke="#394c5e" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
                </children>
             </Pane>
          </children>
       </AnchorPane>
    </center>
+   <bottom>
+      <Label text="made by chrisfaltsetas" textFill="WHITE" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
