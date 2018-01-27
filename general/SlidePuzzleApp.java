@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -38,7 +39,7 @@ public class SlidePuzzleApp extends Application {
 		}
 	}
 	
-	public void showPuzzle() {
+	public void showPuzzle(Image img, int rows, int columns) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(SlidePuzzleApp.class.getResource("Puzzle.fxml"));
@@ -49,7 +50,9 @@ public class SlidePuzzleApp extends Application {
             primaryStage.show();
             
             PuzzleController controller = loader.getController();
-            controller.setSPApp(this);
+            controller.setPuzzleApp(this);
+            controller.setImage(img);
+            controller.setSize(rows, columns);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

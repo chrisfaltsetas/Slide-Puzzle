@@ -11,7 +11,9 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.FileChooser;
 
 public class MenuController {
@@ -20,9 +22,7 @@ public class MenuController {
 	@FXML
 	ImageView preview;
 	@FXML
-	GridPane grid3x3;
-	@FXML
-	GridPane grid4x4;
+	GridPane grid;
 	
 	//Select Mode Options
 	@FXML
@@ -36,17 +36,18 @@ public class MenuController {
 	@FXML
 	MenuButton sizeSelector;
 	@FXML
-	MenuItem selectSize3x3;
+	MenuItem size3x3;
 	@FXML
-	MenuItem selectSize4x4;
+	MenuItem size4x4;
 	
 	@FXML
 	Button play;
 
 	
 	SlidePuzzleApp puzzleApp;
-	boolean imageMode;
-	int puzzleSize;
+	int puzzleRows;
+	int puzzleColumns;
+	Image img;
 	
 	
 	@FXML
@@ -57,56 +58,93 @@ public class MenuController {
         
         File imgFile = fileChooser.showOpenDialog(puzzleApp.getPrimaryStage());
         if (imgFile != null) {
-        	Image img = new Image(imgFile.toURI().toString(), 300, 300, false, true);
+        	img = new Image(imgFile.toURI().toString(), preview.getFitWidth(), preview.getFitHeight(), false, true);
         	preview.setImage(img);
         	modeSelector.setText(imgFile.getName());
+        }
+        
+        if (!sizeSelector.getText().equals("Select Size...")) {
+        	grid.setGridLinesVisible(true);
         }
 	}
 	
 	@FXML
 	protected void loadNumbers(ActionEvent event) throws FileNotFoundException {
-		if (puzzleSize == 3) {
-			FileInputStream fileIS = new FileInputStream("resources/images/numbers3x3.jpg");
-			Image img = new Image(fileIS, 300, 300, false, true);
-			preview.setImage(img);
-		} else if (puzzleSize == 4) {
-			FileInputStream fileIS = new FileInputStream("resources/images/numbers4x4.jpg");
-			Image img = new Image(fileIS, 300, 300, false, true);
+		if (puzzleRows >= 3 && puzzleColumns >= 3) {
+			FileInputStream fileIS = new FileInputStream("src/resources/images/numbers" + puzzleRows + "x" + puzzleColumns +".jpg");
+			img = new Image(fileIS, 300, 300, false, true);
 			preview.setImage(img);
 		}
 		modeSelector.setText(numbers.getText());
+		
+		if (!sizeSelector.getText().equals("Select Size...")) {
+        	grid.setGridLinesVisible(true);
+        }
 	}
 	
 	@FXML
 	protected void selectSize(ActionEvent event) {
-		if (event.getSource().equals(selectSize3x3)) {
-			sizeSelector.setText("3x3");
-			puzzleSize = 3;			
+		if (event.getSource().equals(size3x3)) {
+			sizeSelector.setText(size3x3.getText());
+			setPuzzleRows(3);
+			setPuzzleColumns(3);
+			setGrid();
 			if (modeSelector.getText().equals(numbers.getText())) {
 				numbers.fire();
 			}
-			grid4x4.setGridLinesVisible(false);
-			grid3x3.setGridLinesVisible(true);
-		} else if (event.getSource().equals(selectSize4x4)) {
-			sizeSelector.setText("4x4");
-			puzzleSize = 4;
+		} else if (event.getSource().equals(size4x4)) {
+			sizeSelector.setText(size4x4.getText());
+			setPuzzleRows(4);
+			setPuzzleColumns(4);
+			setGrid();
 			if (modeSelector.getText().equals(numbers.getText())) {
 				numbers.fire();
 			}
-			grid3x3.setGridLinesVisible(false);
-			grid4x4.setGridLinesVisible(true);
 		}
-			
+		if (!modeSelector.getText().equals("Select Mode...")) {
+			grid.setGridLinesVisible(true);
+		}
 	}
 	
 	@FXML
 	protected void playGame(ActionEvent event) {
 		if (preview != null) {
-			puzzleApp.showPuzzle();
-			
+			puzzleApp.showPuzzle(img, puzzleRows, puzzleColumns);			
+		}
+	}	
+	
+	
+	public void setGrid() {
+		double colSize =  grid.getWidth() / puzzleColumns;
+		double rowSize = grid.getHeight() / puzzleRows;
+		
+		resetGrid();		
+		
+		for (int i = 0; i < puzzleColumns; i++) {
+			ColumnConstraints col = new ColumnConstraints();
+			col.setPrefWidth(colSize);
+			grid.getColumnConstraints().add(col);
+		}
+		for (int i = 0; i < puzzleRows; i++) {
+			RowConstraints row = new RowConstraints();
+			row.setPrefHeight(rowSize);
+			grid.getRowConstraints().add(row);
 		}
 	}
 	
+	public void resetGrid() {
+		grid.setGridLinesVisible(false);
+		grid.getRowConstraints().clear();
+		grid.getColumnConstraints().clear();		
+	}	
+
+	public void setPuzzleRows(int puzzleRows) {
+		this.puzzleRows = puzzleRows;
+	}
+
+	public void setPuzzleColumns(int puzzleColumns) {
+		this.puzzleColumns = puzzleColumns;
+	}	
 	
 	public void setPuzzleApp(SlidePuzzleApp sPApp) {
 		this.puzzleApp = sPApp;
