@@ -1,7 +1,9 @@
-package general;
+package app_main;
 
 import java.io.IOException;
 
+import gui.MenuController;
+import gui.PuzzleController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
