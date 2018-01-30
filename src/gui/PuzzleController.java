@@ -1,37 +1,37 @@
 package gui;
 
 import app_main.SlidePuzzleApp;
+import general.ImageCropper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Rectangle;
 
 public class PuzzleController {
 
 	@FXML
-	Button restart;
+	Button tester;
 	@FXML
 	Button menu;
-	
 	@FXML
-	ImageView imgview;
+	Button scramble;
+		
+	ImageView[] imagePieces;
 	
 	
 	@FXML
 	GridPane grid;
 	
-	@FXML
-	Rectangle r1;
 	
 	SlidePuzzleApp puzzleApp;
 	int puzzleRows;
 	int puzzleColumns;
-	Image img;
+	int puzzlePieces;
+	Image originalImage;
+	
 
 	
 	@FXML
@@ -39,15 +39,45 @@ public class PuzzleController {
 		puzzleApp.showMenu();
 	}
 	
+	
 	@FXML
-	protected void testImage(ActionEvent event) {
-		PixelReader pPeader = img.getPixelReader();
-		WritableImage newImage = new WritableImage(pPeader, 0, 0, 100, 100);
-		imgview.setImage(newImage);
+	protected void test(ActionEvent event) {
+		ImageView tempIV = new ImageView();
+		tempIV.setImage(originalImage);
+		Rectangle2D viewportRect = new Rectangle2D(0, 0, 100, 100);
+		//tempIV.setViewport(((ImageView) grid.getChildren().get(2)).getViewport());
+		tempIV.setViewport(viewportRect);
+		//tempIV = (ImageView) grid.getChildren().get(2);
+		grid.add(tempIV, 2, 2);
+	}
+		
+	
+	public void initializePuzzle(Image img, int rows, int columns, GridPane grid) {
+		setImage(img);
+        setSize(rows, columns);
+        setGrid(grid);
+        createPieces();
+	}
+	
+	
+	//Change?
+	public void createPieces() {
+		ImageCropper cropper = new ImageCropper(originalImage, puzzleRows, puzzleColumns);
+		cropper.crop();
+		imagePieces = cropper.getImagePieces();
+		
+		//change -> set layout of imageviews instead of adding them to the grid 
+		int counter = 0;
+		for (int i = 0; i < puzzleRows; i++) {
+			for (int j = 0; j < puzzleColumns; j++) {
+				grid.add(imagePieces[counter], j, i );
+				counter++;
+			}
+		}	
 	}
 	
 	public void setImage(Image img) {
-		this.img = img;
+		this.originalImage = img;
 	}
 	
 	public void setPuzzleApp(SlidePuzzleApp puzzleApp) {
@@ -57,6 +87,13 @@ public class PuzzleController {
 	public void setSize(int rows, int columns) {
 		this.puzzleRows = rows;
 		this.puzzleColumns = columns;
+		this.puzzlePieces = puzzleRows * puzzleColumns;
+	}
+
+	public void setGrid(GridPane grid) {
+		this.grid.getColumnConstraints().setAll(grid.getColumnConstraints());
+		this.grid.getRowConstraints().setAll(grid.getRowConstraints());
+		this.grid.setGridLinesVisible(true);
 	}
 
 }

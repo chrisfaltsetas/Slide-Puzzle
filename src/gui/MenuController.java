@@ -72,7 +72,7 @@ public class MenuController {
 	@FXML
 	protected void loadNumbers(ActionEvent event) throws FileNotFoundException {
 		if (puzzleRows >= 3 && puzzleColumns >= 3) {
-			FileInputStream fileIS = new FileInputStream("resources/images/numbers" + puzzleRows + "x" + puzzleColumns +".jpg");
+			FileInputStream fileIS = new FileInputStream("resources/images/numbers/numbers" + puzzleRows + "x" + puzzleColumns +".jpg");
 			img = new Image(fileIS, 300, 300, false, true);
 			preview.setImage(img);
 		}
@@ -109,8 +109,10 @@ public class MenuController {
 	
 	@FXML
 	protected void playGame(ActionEvent event) {
-		if (preview != null) {
-			puzzleApp.showPuzzle(img, puzzleRows, puzzleColumns);			
+		boolean isModeSelected = !modeSelector.getText().equals("Select Mode...");
+		boolean isSizeSelected = !sizeSelector.getText().equals("Select Size...");
+		if (isModeSelected && isSizeSelected) {
+			puzzleApp.showPuzzle(img, puzzleRows, puzzleColumns, grid);			
 		}
 	}	
 	

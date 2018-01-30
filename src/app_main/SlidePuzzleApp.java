@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class SlidePuzzleApp extends Application {
@@ -19,15 +20,14 @@ public class SlidePuzzleApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("SlidePuzzle");
-        
+        this.primaryStage.setTitle("SlidePuzzle");        
 		showMenu();
 	}
 	
 	public void showMenu() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(SlidePuzzleApp.class.getResource("Menu.fxml"));
+			loader.setLocation(SlidePuzzleApp.class.getResource("../gui/Menu.fxml"));
 			root = (BorderPane) loader.load();
 			
 			Scene scene = new Scene(root);
@@ -41,10 +41,10 @@ public class SlidePuzzleApp extends Application {
 		}
 	}
 	
-	public void showPuzzle(Image img, int rows, int columns) {
+	public void showPuzzle(Image img, int rows, int columns, GridPane grid) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(SlidePuzzleApp.class.getResource("Puzzle.fxml"));
+			loader.setLocation(SlidePuzzleApp.class.getResource("../gui/Puzzle.fxml"));
 			root = (BorderPane) loader.load();
 			
         	Scene scene = new Scene(root);
@@ -52,9 +52,8 @@ public class SlidePuzzleApp extends Application {
             primaryStage.show();
             
             PuzzleController controller = loader.getController();
-            controller.setPuzzleApp(this);
-            controller.setImage(img);
-            controller.setSize(rows, columns);
+            controller.setPuzzleApp(this);            
+            controller.initializePuzzle(img, rows, columns, grid);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
