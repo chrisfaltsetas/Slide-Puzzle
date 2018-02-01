@@ -30,8 +30,8 @@
                </children>
             </Pane>
             <Button fx:id="menu" layoutX="251.0" layoutY="514.0" mnemonicParsing="false" onAction="#goToMenu" text="Menu" />
-            <Button fx:id="scramble" layoutX="38.0" layoutY="514.0" mnemonicParsing="false" onAction="#createPieces" text="Scramble" />
-            <Button fx:id="tester" layoutX="142.0" layoutY="475.0" mnemonicParsing="false" onAction="#test" text="Button" />
+            <Button fx:id="scramble" layoutX="38.0" layoutY="514.0" mnemonicParsing="false" text="Scramble" />
+            <Button fx:id="tester" layoutX="142.0" layoutY="475.0" mnemonicParsing="false" onAction="#test" text="Tester" />
          </children>
       </AnchorPane>
    </center>

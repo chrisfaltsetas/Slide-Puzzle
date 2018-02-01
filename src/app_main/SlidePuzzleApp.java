@@ -1,5 +1,6 @@
 package app_main;
 
+import java.io.File;
 import java.io.IOException;
 
 import gui.MenuController;
@@ -7,9 +8,9 @@ import gui.PuzzleController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class SlidePuzzleApp extends Application {
@@ -37,11 +38,16 @@ public class SlidePuzzleApp extends Application {
 		    MenuController controller = loader.getController();
 		    controller.setPuzzleApp(this);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(getPrimaryStage());
+	        alert.setTitle("Error");
+	        alert.setHeaderText("Scene Loading Error");
+	        alert.setContentText("There was an error loading the Menu scene.");
+	        alert.showAndWait();
 		}
 	}
 	
-	public void showPuzzle(Image img, int rows, int columns, GridPane grid) {
+	public void showPuzzle(File imgFile, int rows, int columns) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(SlidePuzzleApp.class.getResource("../gui/Puzzle.fxml"));
@@ -53,9 +59,14 @@ public class SlidePuzzleApp extends Application {
             
             PuzzleController controller = loader.getController();
             controller.setPuzzleApp(this);            
-            controller.initializePuzzle(img, rows, columns, grid);
+            controller.initializePuzzle(imgFile, rows, columns);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(getPrimaryStage());
+	        alert.setTitle("Error");
+	        alert.setHeaderText("Scene Loading Error");
+	        alert.setContentText("There was an error loading the Puzzle scene.");
+	        alert.showAndWait();
 		}
 	}
 
